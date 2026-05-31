@@ -1,0 +1,52 @@
+// ---------------------------------------------------------------------------
+// SECRETS
+// JWT_SECRET is a Cloudflare Worker secret — NOT a public var. Do not put it
+// in the "vars" block below (vars ship in plaintext to clients of `wrangler
+// deploy --dry-run` and to the dashboard read API).
+//
+// Push it once with:
+//     wrangler secret put JWT_SECRET
+//   (paste the value when prompted)
+//
+// Rotate it by re-running the same command. After rotation, redeploy to force
+// the new printed JWT into use (`pnpm deploy`).
+//
+// For local dev (`wrangler dev`), put `JWT_SECRET=...` in `.dev.vars`. The
+// deploy-time JWT generator (scripts/print-jwt.mjs) also reads from .dev.vars,
+// so keep the local value in sync with the deployed secret.
+// ---------------------------------------------------------------------------
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "message-api",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-05-17",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "message-api-db",
+			"database_id": "e8189afa-1ba9-4694-b9c5-9a8050e3cc9a",
+			"migrations_dir": "migrations",
+		},
+	],
+	"vars": {
+		"GENESIS_WALLET": "5RnVY4jqrWfhnHNSyAhRJBXYDKoGHVbr6gF71du1ejwj",
+		"PUMP_WALLET": "GyzzvFLs4GdytV85nhMpdPr1fkih9Vk5bi5spBpfspiw",
+		"WATER_RATE_USD_PER_L": "0.24",
+		"PUMP_FLOW_RATE_ML_PER_SEC": "10",
+		"PUMP_CONTACT_NAME": "Water Pump",
+		"PUMP_CONTACT_ID": "pump",
+	},
+	"r2_buckets": [
+		{
+			"binding": "IMAGES",
+			"bucket_name": "plant-agent-images",
+		},
+		{
+			"bucket_name": "plant-agent-images",
+			"binding": "plant_agent_images"
+		},
+	],
+}

@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────
+   Tumbuh — clean, minimal, trustworthy.
+   Single light theme. Warm off-white, restrained terracotta accent,
+   thin lines, soft shadows. No grids, no neon, no monospace.
+   Viewer backdrop stays dark (#0b0b0c) for the CCTV plant feed.
+   ────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Accent — the only chroma. Used sparingly */
+  --color-primary: #cf5a30;
+  --color-primary-hover: #b94e28;
+  --color-primary-soft: #f6ece7;
+  --color-primary-ink: #ffffff;
+
+  /* Neutrals — pure black & white grayscale */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f4f5;
+  --color-ink: #18181b;
+  --color-ink-muted: #71717a;
+  --color-line: #e8e8ea;
+  --color-line-strong: #d6d6d9;
+
+  /* CCTV backdrop — dark, for the fullscreen plant feed */
+  --color-cctv: #0b0b0c;
+
+  /* Radius */
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.375rem;
+
+  /* Shadow — soft, subtle */
+  --shadow-card: 0 1px 2px rgb(28 26 23 / 0.04);
+  --shadow-soft: 0 4px 16px -8px rgb(28 26 23 / 0.12);
+  --shadow-pop: 0 12px 32px -12px rgb(28 26 23 / 0.18);
+
+  /* Fonts (wired in layout.tsx) */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-hover);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .tabnum {
+    font-variant-numeric: tabular-nums;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes tumbuh-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: tumbuh-rise 0.32s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes tumbuh-msg-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.msg-in {
+  animation: tumbuh-msg-in 0.28s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .msg-in { animation: none; }
+}
