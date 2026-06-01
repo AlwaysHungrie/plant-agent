@@ -161,7 +161,9 @@ export default function Gallery({ images }: { images: ImageItem[] }) {
   });
   const isLive = idx === 0;
 
-  const dayLabel = now ? `DAY ${dayNumber(now)}` : "";
+  // Day is derived from the displayed frame's capture time, not the wallclock,
+  // so reviewing an older frame shows the day it was taken.
+  const dayLabel = `DAY ${dayNumber(ts)}`;
   const resetLabel = now ? `RESET IN ${resetIn(now)}` : "";
 
   // Playhead = current frame's position across the captured range.
